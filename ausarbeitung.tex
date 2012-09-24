@@ -1,0 +1,309 @@
+\documentclass[twoside, 12pt, a4paper, openright, fleqn, cleardoublepages=empty]{scrreprt}
+
+\input{config/config.tex}
+
+%Input kram, UTF-8 support, sowie deutsche Sonderzeichen
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%Deutsche Silbentrennung
+\usepackage[ngerman]{babel}
+%Einbinden von Grafiken
+\usepackage[pdftex]{graphicx}
+
+%PDF links
+\usepackage[pdftex,plainpages=false,colorlinks,citecolor=black,linkcolor=red,urlcolor=blue,bookmarksopen]{hyperref}
+%Kopf und Fußzeilen
+\usepackage[automark,standardstyle,markusedcase]{scrpage2}
+%Berechnungen innerhalb LATEXs
+\usepackage{calc}
+%Absatztrennung durch Leerzeile statt Einrückung
+\usepackage{parskip}
+
+%Deutsches Format für Referenzen
+\usepackage{bibgerm}
+%Support für \url, zur korrekten Darstellung von URLs
+\usepackage{url}
+%Erweiterte Mathesymbole
+\usepackage{amssymb}
+%Erweiterte Mathefunktionen
+\usepackage{amsmath}
+%Floating figures in figure Umgebung
+\usepackage{subfig}
+%Quellcode Darstellung und Formatierung
+\usepackage{listings}
+%Abkürzungen und Abkürzungsverzeichniss
+\usepackage[printonlyused]{acronym}
+
+\ifdefined\myShowTodos
+\else
+    \def\todoOptions{disable}
+\fi
+
+\input{style/eos-comment}
+
+%Kommentare und Notizen während des Schreibens
+
+\ifdefined\myShowTodos
+\else
+    \disableTodos
+    
+\fi
+
+\input{config/revisors.tex}
+
+
+\input{config/packages.tex}
+
+
+\hypersetup{
+    pdftitle    = {\myTitle},
+    pdfsubject  = {\mySeminar},
+    pdfkeywords = {},
+    pdfauthor   = {\textcopyright\ \myAuthorFirst\ \myAuthorFamily},
+  }
+\pdfcompresslevel=9
+
+\makeatletter
+\providecommand*{\toclevel@algorithm}{0}
+\makeatother
+\textwidth 14cm
+\textheight 21cm
+\headsep 3em
+\headheight 1em
+\evensidemargin 1cm
+\oddsidemargin 1cm
+\setlength{\parskip}{1.5ex plus 0.5ex minus 0.5ex}
+\pagestyle{scrheadings}
+\setlength{\headheight}{3\baselineskip}
+\setheadsepline{.4pt}
+\hyphenation{aus-zu-tauschen such-text}
+\DeclareGraphicsExtensions{.jpg,.pdf,bmp,.png}
+
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+% This is 'SCHUSTER.STY' as of 25. March 1990
+% Disable single lines at the start of a paragraph (Schusterjungen)
+\clubpenalty = 10000
+% Disable single lines at the end of a paragraph (Hurenkinder)
+\widowpenalty = 10000 \displaywidowpenalty = 10000
+
+\title{\sc \myTitle}
+\author{\myAuthorFirst\ \myAuthorFamily}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PREAMBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{empty}
+\vspace*{6.5cm}
+\begin{minipage}[]{\textwidth}
+  \begin{flushleft}
+    \hspace*{\fill} \LARGE \myAuthorFirst\  \myAuthorFamily \\
+    \setlength{\unitlength}{0.1\textwidth}
+    \begin{picture}(10,1)
+      \put(0,0){\line(1,0){10}}
+    \end{picture}\\[0.5cm]
+
+    \huge \textbf{\myTitle}\\%[0.5cm]
+    \setlength{\unitlength}{0.1\textwidth}
+
+    \begin{picture}(10,1)
+      \put(0, 0.4){\line(1,0){10}}
+    \end{picture}\\[0.5cm]
+  \end{flushleft}
+\end{minipage}
+\cleardoublepage
+
+\def\HAbst{0.5cm}
+\begin{titlepage}
+    \begin{flushleft}
+        \begin{center}
+            \includegraphics[width=14cm]{figures/signet/INF_SIGN_druck}\\[1.5cm]
+            {\large \myInstitute\\}{\Large \mySeminar \\[2cm]}
+            {\Large \bf \myTitle\\[0.5cm]}
+            \begin{tabular}[t]{ll}
+                \myTerm & \myYear\\
+            \end{tabular}
+        \end{center}
+    \vspace*{\fill}
+	\large
+	\begin{tabular}[t]{ll}
+		Autor: 		&	\myAuthorFirst\ \myAuthorFamily	\\ & \\
+		Professor:	&	\myProf		\\ & \\
+		Betreuer:	&	\myTutorA	\\ & \\
+		\ifdefined\myTutorB
+		Betreuer:	&	\myTutorB	\\ & \\
+		\fi
+		\ifdefined\myTutorC
+		Betreuer:	&	\myTutorC	\\ & \\
+		\fi
+		\ifdefined\myTutorD
+		Betreuer:	&	\myTutorD	\\ & \\
+		\fi
+	\end{tabular}
+\end{flushleft}
+\newpage
+\vspace*{\fill}
+%		\begin{tabular}[b]{l}
+%          \normalsize Universit\"at Magdeburg \\
+%			\normalsize Fakult\"at f\"ur Informatik \\
+%			\normalsize Postfach 4120 \\
+%			\normalsize D-39016 Magdeburg \\
+%			\normalsize Germany \\
+%		\end{tabular}
+\begin{minipage}[]{\textwidth-2cm}
+  \textbf{\myAuthorFamily, \myAuthorFirst: }\emph{\myTitle}\\
+  \mySeminar, Otto"=von"=Guericke"=Universit\"at\\Magdeburg, \myYear.%%TODO UNI, Institut, Addresse, Jahr
+\end{minipage}
+\end{titlepage}
+
+\cleardoublepage
+\sloppy
+\pagenumbering{roman}
+
+\deftripstyle{chap}[0pt][0.5pt]{}{}{}{}{\pagemark}{}
+\deftripstyle{nonChap}[0pt][0.5pt]{}{}{\headmark}{}{\pagemark}{}
+\renewcommand*{\chapterpagestyle}{chap}
+\pagestyle{nonChap}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ABSTRACT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\myShowAbstract
+\chapter*{Abstrakt}
+\input{content/abstract.tex}
+\cleardoublepage
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PREFACE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\myShowVorwort
+\chapter*{Vorwort}
+\input{content/vorwort.tex}
+\cleardoublepage
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% TABLE OF CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\baselinestretch}{1.2}
+\small\normalsize
+\tableofcontents
+\renewcommand{\baselinestretch}{1}
+\small\normalsize
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% LIST OF FIGURES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\myShowListOfFigures
+\renewcommand{\baselinestretch}{1.3}
+\small\normalsize
+\listoffigures
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\renewcommand{\baselinestretch}{1}
+\small\normalsize
+\cleardoublepage
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% LIST OF TABLES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\myShowListOfTables
+\renewcommand{\baselinestretch}{1.3}
+\small\normalsize
+\listoftables
+\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+\renewcommand{\baselinestretch}{1}
+\small\normalsize
+\cleardoublepage
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% LIST OF LISTINGS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\myShowSourceCode
+\renewcommand{\baselinestretch}{1.3}
+\small\normalsize
+\renewcommand\lstlistlistingname{Quellcodeverzeichnis}
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{Quellcodeverzeichnis}
+\renewcommand{\baselinestretch}{1}
+\small\normalsize
+\cleardoublepage
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% LIST OF ACRONYMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\myShowAcronyms
+\renewcommand{\baselinestretch}{1.3}
+\small\normalsize
+\chapter*{Abkürzungsverzeichnis}
+\input{content/acronyms.tex}
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}
+\renewcommand{\baselinestretch}{1}
+\small\normalsize
+\cleardoublepage
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% OPEN TODOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\myShowTodos
+\renewcommand{\baselinestretch}{1.3}
+\small\normalsize
+\listoftodos
+\addcontentsline{toc}{chapter}{Todo-Verzeichnis}
+\renewcommand{\baselinestretch}{1}
+\small\normalsize
+\cleardoublepage
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\pagestyle{scrheadings}
+
+\input{config/content.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BIBLIOGRAPY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\bibliography{bib/references}
+\bibliographystyle{geralpha}
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Selbständigkeitserklärung
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{empty}
+\chapter*{Selbstst\"andigkeitserkl\"arung}
+
+Ich erkl\"are hiermit an Eides Statt, dass ich die vorliegende Arbeit
+selbst\"andig und ohne Benutzung anderer als der angegebenen Hilfsmittel
+angefertigt habe. Die aus fremden Quellen direkt oder indirekt \"ubernommenen
+Gedanken sind als solche kenntlich gemacht.
+
+Diese Arbeit wurde bisher weder in gleicher noch in \"ahnlicher Form einer
+anderen Pr\"ufungsbeh\"orde vorgelegt und auch noch nicht ver\"offentlicht.
+
+\vspace*{1.5cm}Magdeburg, den \today
+\hspace*{\fill}\myAuthorFirst\ \myAuthorFamily
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Ende
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
